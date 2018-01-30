@@ -6,24 +6,25 @@
 //     |:\/__/   |:|  |     |:/  /   |:\/__/   \:\__\
 //      \|__|     \|__|     \/__/     \|__|     \/__/
 
-package ru.rknrl.rpc
+package ru.rknrl.rpc.tcp
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akka.io.Tcp
 import akka.io.Tcp._
 import akka.util.ByteString
 import com.trueaccord.scalapb.GeneratedMessage
-import ru.rknrl.rpc.ClientSession.CloseConnection
+import ru.rknrl.rpc.tcp.TcpClientSession.CloseConnection
+import ru.rknrl.rpc.{MessageSerialization, Serializer}
 
-object ClientSession {
+object TcpClientSession {
 
   case object CloseConnection
 
   def props(tcp: ActorRef, acceptWithActor: ActorRef ⇒ Props, serializer: Serializer) =
-    Props(classOf[ClientSession], tcp, acceptWithActor, serializer)
+    Props(classOf[TcpClientSession], tcp, acceptWithActor, serializer)
 }
 
-class ClientSession(var tcp: ActorRef, acceptWithActor: ActorRef ⇒ Props, serializer: Serializer) extends ClientSessionBase(acceptWithActor, serializer) {
+class TcpClientSession(var tcp: ActorRef, acceptWithActor: ActorRef ⇒ Props, serializer: Serializer) extends ClientSessionBase(acceptWithActor, serializer) {
   tcp ! Register(self)
 }
 

@@ -2,11 +2,11 @@ organization := "ru.rknrl"
 
 name := "rpc"
 
-version := "1.3"
+version := "1.1.1"
 
-scalaVersion := "2.11.11"
+scalaVersion := "2.11.12"
 
-val akkaVersion = "2.5.1"
+val akkaVersion = "2.5.9"
 val akkaHttpVersion = "10.0.11"
 val scalaPbVersion = "0.4.19"
 

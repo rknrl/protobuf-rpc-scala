@@ -6,23 +6,25 @@
 //     |:\/__/   |:|  |     |:/  /   |:\/__/   \:\__\
 //      \|__|     \|__|     \/__/     \|__|     \/__/
 
-package ru.rknrl.rpc
+package ru.rknrl.rpc.tcp
 
 import java.net.InetSocketAddress
 
 import akka.actor.{ActorRef, Props}
 import akka.io.Tcp._
 import akka.io.{IO, Tcp}
-import ru.rknrl.rpc.Connection.ConnectionClosedException
+import ru.rknrl.rpc.Serializer
+import ru.rknrl.rpc.tcp.TcpClient.ConnectionClosedException
 
-object Connection {
+object TcpClient {
   def props(host: String, port: Int, acceptWithActor: ActorRef ⇒ Props, serializer: Serializer) =
-    Props(classOf[Connection], host, port, acceptWithActor, serializer)
+    Props(classOf[TcpClient], host, port, acceptWithActor, serializer)
 
   class ConnectionClosedException extends Exception
+
 }
 
-class Connection(host: String, port: Int, acceptWithActor: ActorRef ⇒ Props, serializer: Serializer) extends ClientSessionBase(acceptWithActor, serializer) {
+class TcpClient(host: String, port: Int, acceptWithActor: ActorRef ⇒ Props, serializer: Serializer) extends ClientSessionBase(acceptWithActor, serializer) {
   val address = new InetSocketAddress(host, port)
 
   import context.system

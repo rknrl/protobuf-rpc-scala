@@ -13,7 +13,7 @@ import akka.http.scaladsl.model.ws.BinaryMessage
 import akka.stream.ActorMaterializer
 import akka.util.ByteString
 import com.trueaccord.scalapb.GeneratedMessage
-import ru.rknrl.rpc.ClientSession.CloseConnection
+import ru.rknrl.rpc.tcp.TcpClientSession.CloseConnection
 import ru.rknrl.rpc.webSocket.WebSocketClientSession.{WebClientDisconnected, WebSocketConnected}
 import ru.rknrl.rpc.{MessageSerialization, Serializer}
 
