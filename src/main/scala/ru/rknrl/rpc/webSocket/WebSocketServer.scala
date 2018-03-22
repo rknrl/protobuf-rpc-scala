@@ -21,8 +21,6 @@ import ru.rknrl.rpc.webSocket.WebSocketClientSession.WebSocketConnected
 
 object WebSocketServer {
 
-  case class SSLConfig(keyPassword: String, keyPath: String)
-
   def props(host: String, port: Int, acceptWithActor: ActorRef ⇒ Props, serializer: Serializer) =
     Props(classOf[WebSocketServer], host, port, acceptWithActor, serializer)
 }
